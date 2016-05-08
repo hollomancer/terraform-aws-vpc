@@ -28,7 +28,7 @@ resource "aws_security_group" "nat" {
 		from_port = 0
 		to_port = 65535
 		protocol = "tcp"
-		cidr_blocks = ["${aws_subnet.us-east-1d-private.cidr_block}"]
+		cidr_blocks = ["${aws_subnet.us-east-1a-private.cidr_block}"]
 	}
 
 	vpc_id = "${aws_vpc.default.id}"
@@ -59,11 +59,11 @@ resource "aws_subnet" "us-east-1b-public" {
 	availability_zone = "us-east-1b"
 }
 
-resource "aws_subnet" "us-east-1d-public" {
+resource "aws_subnet" "us-east-1a-public" {
 	vpc_id = "${aws_vpc.default.id}"
 
 	cidr_block = "10.0.2.0/24"
-	availability_zone = "us-east-1d"
+	availability_zone = "us-east-1a"
 }
 
 # Routing table for public subnets
@@ -82,8 +82,8 @@ resource "aws_route_table_association" "us-east-1b-public" {
 	route_table_id = "${aws_route_table.us-east-1-public.id}"
 }
 
-resource "aws_route_table_association" "us-east-1d-public" {
-	subnet_id = "${aws_subnet.us-east-1d-public.id}"
+resource "aws_route_table_association" "us-east-1a-public" {
+	subnet_id = "${aws_subnet.us-east-1a-public.id}"
 	route_table_id = "${aws_route_table.us-east-1-public.id}"
 }
 
@@ -96,11 +96,11 @@ resource "aws_subnet" "us-east-1b-private" {
 	availability_zone = "us-east-1b"
 }
 
-resource "aws_subnet" "us-east-1d-private" {
+resource "aws_subnet" "us-east-1a-private" {
 	vpc_id = "${aws_vpc.default.id}"
 
 	cidr_block = "10.0.3.0/24"
-	availability_zone = "us-east-1d"
+	availability_zone = "us-east-1a"
 }
 
 # Routing table for private subnets
@@ -119,8 +119,8 @@ resource "aws_route_table_association" "us-east-1b-private" {
 	route_table_id = "${aws_route_table.us-east-1-private.id}"
 }
 
-resource "aws_route_table_association" "us-east-1d-private" {
-	subnet_id = "${aws_subnet.us-east-1d-private.id}"
+resource "aws_route_table_association" "us-east-1a-private" {
+	subnet_id = "${aws_subnet.us-east-1a-private.id}"
 	route_table_id = "${aws_route_table.us-east-1-private.id}"
 }
 
